@@ -11,7 +11,7 @@ import {
     IconButton,
     Drawer,
     AppBar,
-    Toolbar, Typography, Hidden, InputBase, Divider
+    Toolbar, Typography, Hidden, InputBase, Divider, useMediaQuery, useTheme
 } from "@material-ui/core";
 import {alpha, styled} from "@material-ui/core/styles"
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
@@ -71,6 +71,8 @@ const SearchInputBase = styled(InputBase)(({theme}) => ({
 
 const TopBar: React.FC<TopBarProps> = ({showSearch}) => {
     const context = useContext(MPContext)
+    const theme = useTheme()
+    const burgerMenu = useMediaQuery(theme.breakpoints.down('sm'))
 
     const BurgerMenu: React.FC = () => {
         type Anchor = 'top' | 'left' | 'bottom' | 'right'
@@ -158,29 +160,29 @@ const TopBar: React.FC<TopBarProps> = ({showSearch}) => {
                 </Hidden>
                 }
                 <Box sx={{flexGrow: 1}}/>
-                <Hidden xsDown>
-                    <IconButton aria-label="home" color="inherit" component={RouterLink} to="/">
-                        <HomeOutlinedIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
-                    </IconButton>
-                    <IconButton aria-label="photos" color="inherit" component={RouterLink} to="/photo">
-                        <PhotoOutlinedIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
-                    </IconButton>
-                    <IconButton aria-label="albums" color="inherit" component={RouterLink} to="/album">
-                        <PhotoAlbumOutlinedIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
-                    </IconButton>
-                    <IconButton aria-label="cameras" color="inherit" component={RouterLink} to="/camera">
-                        <PhotoCameraOutlinedIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
-                    </IconButton>
-                    <IconButton aria-label="guest" color="inherit" component={RouterLink} to="/guest">
-                        {context.isGuest ?
-                            <PersonIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/> :
-                            <PersonAddIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
-                        }
-                    </IconButton>
-                </Hidden>
-                <Hidden smUp>
-                    <BurgerMenu/>
-                </Hidden>
+                {
+                    burgerMenu ? <BurgerMenu/> :
+                        <>
+                            <IconButton aria-label="home" color="inherit" component={RouterLink} to="/">
+                                <HomeOutlinedIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
+                            </IconButton>
+                            <IconButton aria-label="photos" color="inherit" component={RouterLink} to="/photo">
+                                <PhotoOutlinedIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
+                            </IconButton>
+                            <IconButton aria-label="albums" color="inherit" component={RouterLink} to="/album">
+                                <PhotoAlbumOutlinedIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
+                            </IconButton>
+                            <IconButton aria-label="cameras" color="inherit" component={RouterLink} to="/camera">
+                                <PhotoCameraOutlinedIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
+                            </IconButton>
+                            <IconButton aria-label="guest" color="inherit" component={RouterLink} to="/guest">
+                                {context.isGuest ?
+                                    <PersonIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/> :
+                                    <PersonAddIcon fontSize={context.uxConfig.denseTopBar ? "medium" : "large"}/>
+                                }
+                            </IconButton>
+                        </>
+                }
             </Toolbar>
             <Divider/>
         </AppBar>
