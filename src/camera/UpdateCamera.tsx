@@ -79,7 +79,7 @@ const UpdateCamera: React.FC<UpdateCameraProps> = ({open, onClose, camera}) => {
     return (
         <MPDialog open={open} onClose={handleOnClose} onOk={handleOk} title={"Update Camera"}
                   text={"Update Camera Spec"} closeOnOk={false}>
-            <Table sx={{minWidth: 512, maxWidth: 600}} aria-label="Camera Specs" size={"small"}>
+            <Table sx={{maxWidth: 600}} aria-label="Camera Specs" size={"small"}>
                 <TableBody>
                     {
                         Object.getOwnPropertyNames(c).filter(v => v !== "id" && v !== "image")

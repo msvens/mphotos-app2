@@ -50,7 +50,7 @@ const CameraDetail: React.FC<CameraDetailProps> = ({camera, onUpdate, children})
                 {children}
             </Box>
 
-            <Table sx={{minWidth: 512, maxWidth: 600,}} aria-label="Camera Specs" size={"small"}>
+            <Table sx={{maxWidth: 600}} aria-label="Camera Specs" size={"small"}>
                 <TableBody>
                     {Object.getOwnPropertyNames(camera).filter(v => v !== "id" && v !== "image")
                         .map((n, i) => {return row(n)})
