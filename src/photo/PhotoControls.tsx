@@ -1,15 +1,15 @@
 import {colorScheme} from "../api/apiutil";
-import {IconButton, Tooltip, alpha, Box, useTheme} from "@material-ui/core";
-import ArrowBackIosSharpIcon from "@material-ui/icons/ArrowBackIosSharp";
-import ArrowForwardIosSharpIcon from "@material-ui/icons/ArrowForwardIosSharp";
-import FullscreenIcon from "@material-ui/icons/Fullscreen";
-import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
-import LockIcon from "@material-ui/icons/Lock";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import PhotoAlbumIcon from "@material-ui/icons/PhotoAlbum";
-import FaceIcon from "@material-ui/icons/Face";
+import {IconButton, Tooltip, alpha, Box, useTheme} from "@mui/material";
+import ArrowBackIosSharpIcon from "@mui/icons-material/ArrowBackIosSharp";
+import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
+import FaceIcon from "@mui/icons-material/Face";
 import React from "react";
 
 type PhotoControlsProps = {

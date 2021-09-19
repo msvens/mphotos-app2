@@ -12,16 +12,16 @@ import {
     Drawer,
     AppBar,
     Toolbar, Typography, Hidden, InputBase, Divider, useMediaQuery, useTheme
-} from "@material-ui/core";
-import {alpha, styled} from "@material-ui/core/styles"
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import MenuIcon from '@material-ui/icons/Menu';
-import PersonIcon from '@material-ui/icons/Person';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import PhotoAlbumOutlinedIcon from '@material-ui/icons/PhotoAlbumOutlined';
-import PhotoCameraOutlinedIcon from '@material-ui/icons/PhotoCameraOutlined';
-import PhotoOutlinedIcon from '@material-ui/icons/PhotoOutlined';
-import SearchIcon from "@material-ui/icons/Search";
+} from "@mui/material";
+import {alpha, styled} from "@mui/material/styles"
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import MenuIcon from '@mui/icons-material/Menu';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PhotoAlbumOutlinedIcon from '@mui/icons-material/PhotoAlbumOutlined';
+import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined';
+import PhotoOutlinedIcon from '@mui/icons-material/PhotoOutlined';
+import SearchIcon from "@mui/icons-material/Search";
 import MPIcon from "./common/MPIcon";
 
 

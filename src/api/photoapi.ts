@@ -351,6 +351,14 @@ class PhotoApi {
             .then(res => PhotoApi.convert(res))
     }
 
+    uploadCameraImage(cameraId: string, file: File): Promise <mt.Camera> {
+        const formData = new FormData();
+        formData.append("image", file, file.name);
+        return PhotoApi.reqBody(`/api/cameras/${cameraId}/image/upoad`, formData)
+            .then(res => res as MPhotosResponse<mt.Camera>)
+            .then(res => PhotoApi.convert(res))
+    }
+
     updateGuest(name: string, email: string): Promise<mt.Guest> {
         const data = {name: name, email: email}
         return PhotoApi.reqBody('/api/guest/update', data, 'POST')

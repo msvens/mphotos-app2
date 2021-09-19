@@ -1,7 +1,7 @@
 import {ColorScheme} from "../api/types";
 import {parseSearchParams} from "../api/apiutil";
-import {Button, Grid} from "@material-ui/core";
-import {styled} from "@material-ui/system";
+import {Button, Grid} from "@mui/material";
+import {styled} from "@mui/system";
 
 type PhotoFilterProps = {
     filter: string

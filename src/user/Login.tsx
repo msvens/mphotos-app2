@@ -1,7 +1,7 @@
 import {useContext, useState} from "react";
 import {MPContext} from "../App";
 import PhotosApi from "../api/photoapi";
-import {Alert, Button, Snackbar, TextField, Typography} from "@material-ui/core";
+import {Alert, Button, Snackbar, TextField, Typography} from "@mui/material";
 
 const Login: React.FC = () => {
 

@@ -1,16 +1,8 @@
-import {Avatar, Box, Button, Divider, Grid, Typography, useMediaQuery, useTheme} from "@material-ui/core";
+import {Avatar, Box, Button, Divider, Grid, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {useContext} from "react";
 import {MPContext} from "../App";
-import {styled} from "@material-ui/system";
 import PhotosApi from "../api/photoapi";
 import {Link as RouterLink} from "react-router-dom";
-
-const RootDiv = styled('div')(({theme}) => ({
-    flexGrow: 1,
-    flexWrap: 'wrap',
-    margin: 'auto',
-    paddingBottom: theme.spacing(4),
-}))
 
 const Bio: React.FC = () => {
 

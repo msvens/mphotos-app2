@@ -2,7 +2,7 @@ import React from 'react';
 
 import {ReactComponent as MPLogoWhite} from './mp_logo_white.svg';
 
-import {SvgIcon, SvgIconProps} from "@material-ui/core";
+import {SvgIcon, SvgIconProps} from "@mui/material";
 
 type MPIconColor = "black" | "white"
 export interface MPIconProps extends SvgIconProps{

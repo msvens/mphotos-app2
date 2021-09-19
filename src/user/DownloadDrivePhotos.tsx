@@ -6,7 +6,7 @@ import {
     LinearProgress,
     LinearProgressProps,
     Typography
-} from "@material-ui/core";
+} from "@mui/material";
 import {useEffect, useState} from "react";
 import {Job, JobState} from "../api/types";
 import PhotosApi from "../api/photoapi";

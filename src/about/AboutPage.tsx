@@ -1,5 +1,5 @@
-import { styled } from '@material-ui/system'
-import {Box, Typography, Link} from "@material-ui/core"
+import { styled } from '@mui/system'
+import {Box, Typography, Link} from "@mui/material"
 import {ReactComponent as LogoWhite} from '../common/mp_logo_white.svg'
 
 const RootComponent = styled('div')(({theme}) => ({

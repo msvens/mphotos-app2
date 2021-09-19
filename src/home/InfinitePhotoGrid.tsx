@@ -3,8 +3,8 @@ import {useEffect, useState} from "react";
 import {Photo, PhotoType} from "../api/types";
 import PhotosApi from "../api/photoapi";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {ImageList, ImageListItem} from "@material-ui/core";
-import {styled} from "@material-ui/system";
+import {ImageList, ImageListItem} from "@mui/material";
+import {styled} from "@mui/system";
 
 interface InfinitePhotoGridProps {
     fetchItems: number,

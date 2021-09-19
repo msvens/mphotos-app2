@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {MPContext} from "../App";
 import {useContext} from "react";
 import PhotosApi from "../api/photoapi";
-import {Box, Button, List, ListItem, ListItemText, Typography} from "@material-ui/core";
+import {Box, Button, List, ListItem, ListItemText, Typography} from "@mui/material";
 import Profile from "./Profile";
 import Drive from "./Drive";
 import EditUXConfig from "./EditUXConfig";
@@ -11,6 +11,7 @@ import Login from "./Login";
 
 const PROFILE = 'profile';
 const DRIVE = 'drive';
+const LOCAL = 'local';
 const LOGOUT = 'logout';
 const UXCONFIG = 'uxconfig'
 
@@ -18,7 +19,8 @@ const UXCONFIG = 'uxconfig'
 
 const MenuItems = new Map<string, string>([
         [PROFILE, "Profile"],
-        [DRIVE, "Drive"],
+        [DRIVE, "Google Drive"],
+        [LOCAL, "Local Drive"],
         [UXCONFIG, "UX Config"],
         [LOGOUT, "Logout"],
     ]
@@ -30,7 +32,7 @@ const UserPage: React.FC = () => {
 
 
     const handleLogout = async (e: React.MouseEvent) => {
-        PhotosApi.logout().then(res => {
+        PhotosApi.logout().then(_res => {
             context.checkUser()
         }).catch(e => alert("check user: " + e));
     };
@@ -46,7 +48,7 @@ const UserPage: React.FC = () => {
         }}>
             <Box sx={{minWidth: 140, flexShrink: 0,}} component={"span"} borderRight={1}>
                 <List>
-                    {Array.from(MenuItems.entries()).map((entry, idx) => (
+                    {Array.from(MenuItems.entries()).map((entry, _idx) => (
                         <ListItem key={entry[0]} button component={RouterLink} to={`/user/${entry[0]}`}>
                             <ListItemText primary={entry[1]} primaryTypographyProps={{variant: "h6"}}/>
                         </ListItem>

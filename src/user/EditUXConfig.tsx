@@ -9,7 +9,7 @@ import {
     MenuItem, Radio,
     RadioGroup, Switch,
     TextField
-} from "@material-ui/core";
+} from "@mui/material";
 import {Colors, UXConfig} from "../api/types";
 import PhotosApi from "../api/photoapi";
 import {MPContext} from "../App";

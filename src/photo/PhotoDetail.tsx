@@ -3,11 +3,11 @@ import {useContext, useEffect, useState} from "react";
 import {MPContext} from "../App";
 import PhotosApi from "../api/photoapi";
 import {toCameraId} from "../api/apiutil";
-import {Box, Button, Grid, IconButton, InputBase, Paper, Typography} from "@material-ui/core";
-import Link from "@material-ui/core/Link";
+import {Box, Button, Grid, IconButton, InputBase, Paper, Typography} from "@mui/material";
+import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router-dom";
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddGuest from "../guest/AddGuest";
 
 type PhotoDetailProps = {
@@ -37,7 +37,7 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
         if(context.isGuest) {
             PhotosApi.getGuestLike(props.photo.driveId).then(res => setLikesPhoto(res)).catch(e => alert("error: "+e.toString()))
         } else {
-            setLikesPhoto(prev => false)
+            setLikesPhoto(false)
         }
     }, [props.photo, context.isGuest])
 
@@ -60,7 +60,7 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
             setShowAddGuest(true)
         } else {
             PhotosApi.commentPhoto(props.photo.driveId, newComment)
-                .then(res => {
+                .then(_res => {
                     setNewComment('')
                     PhotosApi.getPhotoComments(props.photo.driveId)
                         .then(res => setComments(res))
@@ -72,13 +72,13 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
         if(!context.isGuest) {
             setShowAddGuest(true)
         } else {
-            PhotosApi.likePhoto(props.photo.driveId).then(res => setLikesPhoto(true)).catch(e => alert(e))
+            PhotosApi.likePhoto(props.photo.driveId).then(_res => setLikesPhoto(true)).catch(e => alert(e))
 
         }
     }
 
     const handleClickUnlike = () => {
-        PhotosApi.unlikePhoto(props.photo.driveId).then(res => setLikesPhoto(false)).catch(e => alert(e))
+        PhotosApi.unlikePhoto(props.photo.driveId).then(_res => setLikesPhoto(false)).catch(e => alert(e))
     }
 
     const getDate = () => {
@@ -159,7 +159,7 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
         index: number
     }
 
-    const CommentBox: React.FC<CommentBoxProps> = ({comment, index}) => {
+    const CommentBox: React.FC<CommentBoxProps> = ({comment, _idx}) => {
         const d = PhotosApi.toDate(comment.time)
         const dStr = d.toDateString()
         return (

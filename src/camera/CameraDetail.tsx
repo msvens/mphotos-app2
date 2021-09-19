@@ -1,9 +1,9 @@
 import {Camera, CameraImageSize} from "../api/types";
 import {createPhotoSearchParams, getCameraSettingDisplayName, toQueryString} from "../api/apiutil";
-import {TableCell, TableRow, Typography, Link, Table, TableBody, Box} from "@material-ui/core";
+import {TableCell, TableRow, Typography, Link, Table, TableBody, Box} from "@mui/material";
 import {Link as RouterLink} from "react-router-dom";
 import PhotosApi from "../api/photoapi";
-import {styled} from "@material-ui/system";
+import {styled} from "@mui/system";
 
 type CameraDetailProps = {
     camera: Camera

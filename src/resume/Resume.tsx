@@ -1,5 +1,5 @@
-import {styled} from "@material-ui/system"
-import {Box, Grid, Link, Typography} from "@material-ui/core";
+import {styled} from "@mui/system"
+import {Box, Grid, Link, Typography} from "@mui/material";
 
 type ExperienceProps = {
     years: string;

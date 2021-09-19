@@ -1,4 +1,4 @@
-import {Button, TextField} from "@material-ui/core";
+import {Button, TextField} from "@mui/material";
 import PhotosApi from "../api/photoapi";
 import {useEffect, useState} from "react";
 

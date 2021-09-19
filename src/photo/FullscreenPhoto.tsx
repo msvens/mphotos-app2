@@ -1,8 +1,8 @@
 import {Photo, PhotoType} from "../api/types";
-import {Box, Dialog} from "@material-ui/core";
+import {Box, Dialog} from "@mui/material";
 import PhotoControls from "./PhotoControls";
 import PhotosApi from "../api/photoapi";
-import {styled} from "@material-ui/system";
+import {styled} from "@mui/system";
 
 type FullscreenPhotoProps = {
     photo: Photo,

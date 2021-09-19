@@ -4,7 +4,7 @@ import {MPContext} from "../App";
 import {colorScheme, parseSearchParams} from "../api/apiutil";
 import {PhotoDeck} from "./PhotoDeck";
 import {Album, ColorScheme, Photo, PhotoList, PhotoType} from "../api/types";
-import {Grid, useMediaQuery, useTheme} from "@material-ui/core";
+import {Grid, useMediaQuery, useTheme} from "@mui/material";
 import PhotosApi from "../api/photoapi";
 import PhotoControls from "./PhotoControls";
 import PhotoDetail from "./PhotoDetail";
@@ -12,7 +12,7 @@ import FullscreenPhoto from "./FullscreenPhoto";
 import EditPhoto from "./EditPhoto";
 import MPDialog from "../common/MpDialog";
 import PhotoFilter from "./PhotoFilter";
-import {styled} from "@material-ui/system";
+import {styled} from "@mui/system";
 
 type TouchState = {
     xStart: number,
@@ -36,19 +36,19 @@ const RootDiv = styled('div')(({theme}) => ({
     paddingBottom: theme.spacing(2),
 }))
 
-const SmallImg = styled('img')(({theme}) => ({
+const SmallImg = styled('img')({
     maxWidth: '100%',
     maxHeight: '100%',
     alignSelf: 'flex-start'
-}))
+})
 
-const NormalImg = styled('img')(({theme}) => ({
+const NormalImg = styled('img')({
     objectFit: 'contain',
     maxWidth: '100%',
     maxHeight: '100%',
     width: 'auto',
     height: 'auto',
-}))
+})
 
 const LeftRightImg = styled('img')(({theme}) => ({
     paddingLeft: theme.spacing(7),
@@ -197,7 +197,7 @@ const PhotoPage: React.FC = () => {
 
     const deletePhoto = () => {
         PhotosApi.deletePhoto(photos.driveId(), true)
-            .then(p => {
+            .then(_p => {
                 setPhotos(photos.delete())
             })
             .catch(e => alert(e.toString()))
@@ -284,7 +284,7 @@ const PhotoPage: React.FC = () => {
                                        onEdit={() => setShowUpdate(true)}
                                        onProfilePic={() => alert("edit")}
                                        showEditControls={context.isUser}
-                                       isAlbum={album ? true : false}
+                                       isAlbum={!!album}
                                        isPrivate={photos.get().private}
                                        isLargeDisplay={isLargeDisplay}
                                        inFullscreen={false}

@@ -2,7 +2,7 @@ import {useContext} from "react";
 import {MPContext} from "../App";
 import Bio from "./Bio";
 import InfinitePhotoGrid from "./InfinitePhotoGrid";
-import {styled} from "@material-ui/core/styles";
+import {styled} from "@mui/material/styles";
 
 const RootDiv = styled('div')(({theme}) => ({
     display: 'flex',

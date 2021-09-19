@@ -1,17 +1,17 @@
 import {Album} from "../api/types";
 import PhotosApi from "../api/photoapi";
-import {Box, Button, IconButton, ImageList, ImageListItem, ImageListItemBar} from "@material-ui/core";
+import {Box, Button, IconButton, ImageList, ImageListItem, ImageListItemBar} from "@mui/material";
 import EditAlbum from "./EditAlbum";
 import {Link as RouterLink} from "react-router-dom";
 import AddAlbum from "./AddAlbum";
 import MPDialog from "../common/MpDialog";
-import InfoIcon from '@material-ui/icons/Info'
-import EditIcon from '@material-ui/icons/Edit'
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
-import AddPhotoAlternateOutlinedIcon from '@material-ui/icons/AddPhotoAlternateOutlined';
+import InfoIcon from '@mui/icons-material/Info'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import {useContext, useEffect, useState} from "react";
 import {MPContext} from "../App";
-import {styled} from "@material-ui/system";
+import {styled} from "@mui/system";
 
 type AlbumGridProps = {
     columns: number,

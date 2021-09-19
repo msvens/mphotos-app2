@@ -1,4 +1,4 @@
-import {Button, Divider, TextField, Typography} from "@material-ui/core";
+import {Button, Divider, TextField, Typography} from "@mui/material";
 import MPDialog from "../common/MpDialog";
 import {useEffect, useState} from "react";
 import DownloadDrivePhotos from "./DownloadDrivePhotos";

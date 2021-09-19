@@ -2,7 +2,7 @@ import {Album} from "../api/types";
 import {useEffect, useState} from "react";
 import PhotosApi from "../api/photoapi";
 import MPDialog from "../common/MpDialog";
-import {TextField} from "@material-ui/core";
+import {TextField} from "@mui/material";
 
 type EditAlbumProps = {
     open: boolean,

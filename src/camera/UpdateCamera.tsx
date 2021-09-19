@@ -2,7 +2,7 @@ import {Camera} from "../api/types";
 import {useState} from "react";
 import PhotosApi from "../api/photoapi";
 import {getCameraSettingDisplayName, setCameraSetting} from "../api/apiutil";
-import {Input, Table, TableBody, TableCell, TableRow} from "@material-ui/core";
+import {Input, Table, TableBody, TableCell, TableRow} from "@mui/material";
 import MPDialog from "../common/MpDialog";
 
 type UpdateCameraProps = {
@@ -83,7 +83,7 @@ const UpdateCamera: React.FC<UpdateCameraProps> = ({open, onClose, camera}) => {
                 <TableBody>
                     {
                         Object.getOwnPropertyNames(c).filter(v => v !== "id" && v !== "image")
-                            .map((p,i) => {
+                            .map((p,_i) => {
                                 if(p === "make" || p === "model")
                                     return row(p)
                                 else

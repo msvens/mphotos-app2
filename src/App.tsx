@@ -5,7 +5,7 @@ import PhotosApi from "./api/photoapi";
 import {useGuest} from "./hooks/useGuest";
 import {useUser} from "./hooks/useUser";
 import {useUXConfig} from "./hooks/useUXConfig";
-import {createTheme, CssBaseline, responsiveFontSizes, ThemeProvider} from "@material-ui/core";
+import {createTheme, CssBaseline, responsiveFontSizes, ThemeProvider} from "@mui/material";
 import MPhotos from "./MPhotos";
 
 interface IMPContext {

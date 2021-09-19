@@ -1,11 +1,11 @@
 import {useContext, useEffect, useState} from "react";
 import {Link as RouterLink, useLocation} from "react-router-dom";
-import Link from "@material-ui/core/Link";
+import Link from "@mui/material/Link";
 import PhotosApi from "../api/photoapi";
 import {MPContext} from "../App";
-import {Box, Button, Typography} from "@material-ui/core";
+import {Box, Button, Typography} from "@mui/material";
 import MPDialog from "../common/MpDialog";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AddGuest from "./AddGuest";
 
 const buttonLayout = {
@@ -30,7 +30,7 @@ const GuestPage: React.FC = () => {
                 if (res) {
                     context.checkGuest()
                 }
-            }).catch(err => alert("Error verifying guest "))
+            }).catch(err => alert("Error verifying guest "+err.toString()))
         }
     }, [location.search, context])
 

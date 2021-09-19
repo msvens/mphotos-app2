@@ -1,6 +1,6 @@
 import {Link as RouterLink} from "react-router-dom";
-import Link from "@material-ui/core/Link";
-import {AppBar, Box, Toolbar, Typography} from "@material-ui/core";
+import Link from "@mui/material/Link";
+import {AppBar, Box, Toolbar, Typography} from "@mui/material";
 import {useContext} from "react";
 import {MPContext} from "./App";
 

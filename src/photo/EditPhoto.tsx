@@ -2,7 +2,7 @@ import {Album, Photo} from "../api/types";
 import {useEffect, useState} from "react";
 import PhotosApi from "../api/photoapi";
 import MPDialog from "../common/MpDialog";
-import {FormControl, Input, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@material-ui/core";
+import {FormControl, Input, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 
 type EditPhotoProps = {
     open: boolean

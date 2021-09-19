@@ -3,7 +3,7 @@ import {useContext, useEffect, useState} from "react";
 import {Guest} from "../api/types";
 import {MPContext} from "../App";
 import PhotosApi from "../api/photoapi";
-import {TextField} from "@material-ui/core";
+import {TextField} from "@mui/material";
 
 type AddGuestProps = BaseDialog & {
 

@@ -3,8 +3,8 @@ import {useEffect} from "react";
 import TopBar from "./TopBar";
 import ResumePage from "./resume/Resume";
 import AboutPage from "./about/AboutPage";
-import {Box} from "@material-ui/core";
-import {styled} from "@material-ui/system";
+import {Box} from "@mui/material";
+import {styled} from "@mui/system";
 import BottomBar from "./BottomBar";
 import HomePage from "./home/HomePage";
 import GuestPage from "./guest/GuestPage";
@@ -23,12 +23,12 @@ function ScrollToTop() {
     return null;
 }
 
-const RootDiv = styled('div')(({theme}) => ({
+const RootDiv = styled('div')({
     display: 'flex',
     flexDirection: 'column',
     marginBottom: 0,
     minHeight: '100vh',
-}))
+})
 
 const MPhotos: React.FC = () => {
     return (
