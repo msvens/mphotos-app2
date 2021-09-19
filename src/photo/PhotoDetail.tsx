@@ -159,7 +159,7 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
         index: number
     }
 
-    const CommentBox: React.FC<CommentBoxProps> = ({comment, _idx}) => {
+    const CommentBox: React.FC<CommentBoxProps> = ({comment, index}) => {
         const d = PhotosApi.toDate(comment.time)
         const dStr = d.toDateString()
         return (
