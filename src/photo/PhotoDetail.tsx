@@ -1,4 +1,4 @@
-import {Guest, Photo, PhotoComment} from "../api/types";
+import {Guest, GuestReaction, Photo, PhotoComment} from "../api/types";
 import {useContext, useEffect, useState} from "react";
 import {MPContext} from "../App";
 import PhotosApi from "../api/photoapi";
@@ -26,7 +26,7 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
 
     //const classes = useStyles(colorScheme(context.uxConfig.photoDetailBackgroundColor))
 
-    const [guests, setGuests] = useState<Guest[]>([])
+    const [guests, setGuests] = useState<GuestReaction[]>([])
     const [comments, setComments] = useState<PhotoComment[]> ([])
     const [showAddGuest, setShowAddGuest] = useState(false)
     const [newComment, setNewComment] = useState<string>('')
@@ -35,19 +35,19 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
 
     useEffect( () => {
         if(context.isGuest) {
-            PhotosApi.getGuestLike(props.photo.driveId).then(res => setLikesPhoto(res)).catch(e => alert("error: "+e.toString()))
+            PhotosApi.getGuestLike(props.photo.id).then(res => setLikesPhoto(res)).catch(e => alert("error: "+e.toString()))
         } else {
             setLikesPhoto(false)
         }
     }, [props.photo, context.isGuest])
 
     useEffect(() => {
-        PhotosApi.getPhotoLikes(props.photo.driveId).then(res => setGuests(res)).catch(e => alert("error: "+e.toString()))
+        PhotosApi.getPhotoLikes(props.photo.id).then(res => setGuests(res)).catch(e => alert("error: "+e.toString()))
 
     }, [props.photo, likesPhoto])
 
     useEffect(() => {
-        PhotosApi.getPhotoComments(props.photo.driveId).then(res => setComments(res)).catch(e => alert("error: "+e.toString()))
+        PhotosApi.getPhotoComments(props.photo.id).then(res => setComments(res)).catch(e => alert("error: "+e.toString()))
 
     }, [props.photo])
 
@@ -59,10 +59,10 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
         if(!context.isGuest) {
             setShowAddGuest(true)
         } else {
-            PhotosApi.commentPhoto(props.photo.driveId, newComment)
+            PhotosApi.commentPhoto(props.photo.id, newComment)
                 .then(_res => {
                     setNewComment('')
-                    PhotosApi.getPhotoComments(props.photo.driveId)
+                    PhotosApi.getPhotoComments(props.photo.id)
                         .then(res => setComments(res))
                 }).catch(err => alert(err))
         }
@@ -72,13 +72,13 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
         if(!context.isGuest) {
             setShowAddGuest(true)
         } else {
-            PhotosApi.likePhoto(props.photo.driveId).then(_res => setLikesPhoto(true)).catch(e => alert(e))
+            PhotosApi.likePhoto(props.photo.id).then(_res => setLikesPhoto(true)).catch(e => alert(e))
 
         }
     }
 
     const handleClickUnlike = () => {
-        PhotosApi.unlikePhoto(props.photo.driveId).then(_res => setLikesPhoto(false)).catch(e => alert(e))
+        PhotosApi.unlikePhoto(props.photo.id).then(_res => setLikesPhoto(false)).catch(e => alert(e))
     }
 
     const getDate = () => {
@@ -165,7 +165,7 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
         return (
             <Box sx={{marginTop: 2, marginRight: 2}}>
                 <Typography variant="body2" color={"secondary"}>
-                    {comment.guest}, {dStr}
+                    {comment.name}, {dStr}
                 </Typography>
                 <Typography variant="body2">
                     {comment.body}

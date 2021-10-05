@@ -25,7 +25,9 @@ const dummyContext: IMPContext = {
   isGuestLoading: false,
   guest: {
     name: "",
-    email: ""
+    email: "",
+    verified: false,
+    time: new Date(0).toISOString()
   },
   checkGuest: () => {
     alert("dummy")

@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import PhotosApi from "../api/photoapi";
 
 export const useGuest: () => [boolean, Guest, () => void] = () => {
-    const emptyGuest: Guest = {name: "", email: ""}
+    const emptyGuest: Guest = {name: "", email: "", verified: false, time: new Date(0).toISOString()}
     const [isGuest, setIsGuest] = useState<boolean>(false)
     const [guest, setGuest] = useState<Guest>(emptyGuest)
     const [refresh, setRefresh] = useState<boolean>(false)

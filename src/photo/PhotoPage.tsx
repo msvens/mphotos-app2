@@ -126,7 +126,7 @@ const PhotoPage: React.FC = () => {
                 let newIdx = 0
                 if (photoId) {
                     for (let i = 0; i < pl.length; i++) {
-                        if (pl.photos[i].driveId === photoId) {
+                        if (pl.photos[i].id === photoId) {
                             newIdx = i
                         }
                     }
@@ -196,7 +196,7 @@ const PhotoPage: React.FC = () => {
     }
 
     const deletePhoto = () => {
-        PhotosApi.deletePhoto(photos.driveId(), true)
+        PhotosApi.deletePhoto(photos.id(), true)
             .then(_p => {
                 setPhotos(photos.delete())
             })
@@ -204,9 +204,11 @@ const PhotoPage: React.FC = () => {
     }
 
     const handleBackward = () => {
-        setPhotos(photos.previous())
-        //history.push('/photo/' + photo.driveId())
-        window.history.pushState({}, '', '/photo/' + photos.driveId())
+        const n = photos.previous()
+        history.push('/photo/' + n.id())
+        setPhotos(n)
+        history.push('/photo/' + photos.id())
+        //window.history.pushState({}, '', '/photo/' + photos.id())
     }
 
     const handleCloseUpdate = (p?: Photo) => {
@@ -217,13 +219,14 @@ const PhotoPage: React.FC = () => {
     }
 
     const handleForward = () => {
-        setPhotos(photos.next())
-        //history.push('/photo/' + photo.next().driveId())
-        window.history.pushState({}, '', '/photo/' + photos.driveId())
+        const n = photos.next()
+        history.push('/photo/' + n.id())
+        setPhotos(n)
+        //window.history.pushState({}, '', '/photo/' + photos.id())
     }
 
     const handlePrivate = () => {
-        PhotosApi.togglePrivate(photos.driveId())
+        PhotosApi.togglePrivate(photos.id())
             .then(p => {
                 setPhotos(photos.update(p))
             })
@@ -267,7 +270,7 @@ const PhotoPage: React.FC = () => {
                     {location.search &&
                     <Grid item xs={12}>
                         <PhotoFilter cs={cs} filter={location.search}
-                                     onClear={() => history.push('/photo/' + photos.driveId())}/>
+                                     onClear={() => history.push('/photo/' + photos.id())}/>
                     </Grid>
                     }
                     <Grid item xs={12} style={{backgroundColor: context.uxConfig.photoBackgroundColor}}

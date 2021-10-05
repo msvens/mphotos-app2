@@ -127,7 +127,7 @@ export function setCameraSetting(c: Camera, key: string, value: string): Camera 
 
     function getBoolean(newValue: string): boolean {
         let n = newValue.trim().toLowerCase()
-        return !n || n === 'false' || n === 'no' || n === '0' ? false : true
+        return !n || n === 'false' || n === 'f' || n === 'no' || n === '0' ? false : true
     }
 
     const cc: Camera = {...c}

@@ -75,8 +75,8 @@ const InfinitePhotoGrid: React.FC<InfinitePhotoGridProps> = (props: InfinitePhot
             >
                 <ImageList cols={props.columns} rowHeight={'auto'} gap={props.spacing}>
                     {photos.map(photo => (
-                        <ImageListItem sx={{width: '100%', height: '100%'}} cols={1} key={photo.driveId}>
-                            <RouterLink to={`/photo/${photo.driveId}`}>
+                        <ImageListItem sx={{width: '100%', height: '100%'}} cols={1} key={photo.id}>
+                            <RouterLink to={`/photo/${photo.id}`}>
                                 {photo.private
                                     ? <ThumbPrivate alt={photo.fileName}
                                                      src={PhotosApi.getImageUrl(photo, PhotoType.Thumb, false, false)}/>

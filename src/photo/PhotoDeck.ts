@@ -24,20 +24,20 @@ export class PhotoDeck {
         return this.photos[this.idx]
     }
 
-    driveId(): string {
-        return this.get().driveId
+    id(): string {
+        return this.get().id
     }
 
     delete(): PhotoDeck {
-        const driveId = this.get().driveId
-        const newPhotos = this.photos.filter(p => p.driveId !== driveId)
+        const id = this.get().id
+        const newPhotos = this.photos.filter(p => p.id !== id)
         const newIdx = this.idx >= newPhotos.length ? 0 : this.idx
         return new PhotoDeck(newPhotos, newIdx)
     }
 
     update(p: Photo): PhotoDeck {
         const newPhotos = this.photos.map((photo) => {
-            if (photo.driveId === p.driveId) {
+            if (photo.id === p.id) {
                 return p
             } else
                 return photo

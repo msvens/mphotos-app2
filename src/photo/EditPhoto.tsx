@@ -45,7 +45,7 @@ const EditPhoto: React.FC<EditPhotoProps> = ({open, photo, onClose}) => {
 
     useEffect(() => {
         const fetchAlbums = async () => {
-            const res = await PhotosApi.getPhotoAlbums(photo.driveId)
+            const res = await PhotosApi.getPhotoAlbums(photo.id)
             const names: string[] = []
             for(let i = 0; i < res.length; i++) {
                 names.push(res[i].name)
@@ -55,8 +55,8 @@ const EditPhoto: React.FC<EditPhotoProps> = ({open, photo, onClose}) => {
         fetchAlbums()
     }, [photo])
 
-    const getAlbumIds: () => number[] = () => {
-        const ids: number[] = []
+    const getAlbumIds: () => string[] = () => {
+        const ids: string[] = []
         for(let i = 0; i < albumNames.length; i++) {
             for(let j = 0; j < albums.length; j++) {
                 if(albumNames[i] === albums[j].name) {
@@ -73,7 +73,7 @@ const EditPhoto: React.FC<EditPhotoProps> = ({open, photo, onClose}) => {
     }
 
     const handleUpdatePhoto = () => {
-        PhotosApi.updatePhoto(photo.driveId, title, description, keywords, getAlbumIds())
+        PhotosApi.updatePhoto(photo.id, title, description, keywords, getAlbumIds())
             .then(res => {
                 onClose(res)
             })

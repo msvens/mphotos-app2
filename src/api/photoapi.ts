@@ -105,7 +105,7 @@ class PhotoApi {
             .then(res => res as MPhotosResponse<mt.PhotoComment>).then(res => PhotoApi.convert(res))
     }
 
-    deleteAlbum(id: number): Promise<mt.Album> {
+    deleteAlbum(id: string): Promise<mt.Album> {
         return PhotoApi.req(`/api/albums/${id}`, 'DELETE')
             .then(res => res as MPhotosResponse<mt.Album>).then(res => PhotoApi.convert(res));
     }
@@ -203,9 +203,9 @@ class PhotoApi {
             .then(res => PhotoApi.convert(res))
     }
 
-    getPhotoLikes(photoId: string): Promise<mt.Guest[]> {
+    getPhotoLikes(photoId: string): Promise<mt.GuestReaction[]> {
         return PhotoApi.req(`/api/likes/${photoId}`)
-            .then(res => res as MPhotosResponse<mt.Guest[]>)
+            .then(res => res as MPhotosResponse<mt.GuestReaction[]>)
             .then(res => PhotoApi.convert(res))
     }
 
@@ -372,7 +372,7 @@ class PhotoApi {
     };
 
     updatePhoto(photoId: string, title: string, description: string,
-                keywords: string, albums: number[]): Promise<mt.Photo> {
+                keywords: string, albums: string[]): Promise<mt.Photo> {
         const data = {id: photoId, title: title, description: description,
             keywords: keywords.split(","), albums: albums}
         return PhotoApi.reqBody(`/api/photos/${photoId}`, data)
@@ -406,7 +406,7 @@ class PhotoApi {
 
     verifyGuest(query: string): Promise<boolean> {
         return PhotoApi.req(`/api/guest/verify${query}`)
-            .then(res => res as MPhotosResponse<mt.Verify>)
+            .then(res => res as MPhotosResponse<mt.Guest>)
             .then(res => PhotoApi.convert(res).verified)
     }
 }

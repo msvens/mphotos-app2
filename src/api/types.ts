@@ -1,5 +1,5 @@
 export type Album = {
-    id: number
+    id: string
     name: string
     description: string
     coverPic: string
@@ -98,6 +98,14 @@ export type DriveFiles = {
 export type Guest = {
     email: string;
     name: string;
+    verified: boolean;
+    time: string;
+}
+
+export type GuestReaction = {
+    email: string;
+    name: string;
+    kind: string;
 }
 
 export type GuestLike = {
@@ -128,14 +136,18 @@ export enum JobState {
 
 
 export type Photo = {
-    driveId: string;
+    id: string;
     md5: string;
+    source: string;
+    sourceId: string;
+    sourceOther: string;
+    sourceDate: string;
+    uploadDate: string;
+    originalDate: string;
     fileName: string;
     title: string;
     keywords: string;
     description: string;
-    driveDate: string;
-    originalDate: string;
     cameraMake: string;
     cameraModel: string;
     lensMake?: string;
@@ -153,8 +165,8 @@ export type Photo = {
 
 export type PhotoComment = {
     id: number
-    driveId: string
-    guest: string
+    photoId: string
+    name: string
     time: string
     body: string
 }
@@ -198,10 +210,4 @@ export type UXConfig = {
 
     denseTopBar: boolean
     denseBottomBar: boolean
-}
-
-export type Verify = {
-    verified: boolean
-    time: string
-
 }
