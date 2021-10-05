@@ -2,7 +2,17 @@ import {Album, Photo} from "../api/types";
 import {useEffect, useState} from "react";
 import PhotosApi from "../api/photoapi";
 import MPDialog from "../common/MpDialog";
-import {FormControl, Input, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
+import {
+    Checkbox,
+    FormControl,
+    Input,
+    InputLabel, ListItemText,
+    MenuItem,
+    OutlinedInput,
+    Select,
+    SelectChangeEvent,
+    TextField
+} from "@mui/material";
 
 type EditPhotoProps = {
     open: boolean
@@ -109,7 +119,9 @@ const EditPhoto: React.FC<EditPhotoProps> = ({open, photo, onClose}) => {
                        onChange={handleTitleChange} fullWidth/>
             <TextField margin="dense" id="keywords" label="Keywords" value={keywords}
                        onChange={handleKeywordsChange} fullWidth/>
-            <FormControl sx={{ minWidth: 300, maxWidth: 300,}}>
+            <TextField margin="dense" id="description" label="Description" value={description}
+                       onChange={handleDescriptionChange} fullWidth multiline rows={2} />
+            <FormControl margin="dense" sx={{ minWidth: 300}}>
                 <InputLabel id="albums-label">Albums</InputLabel>
                 <Select
                     labelId="albums-label"
@@ -117,18 +129,19 @@ const EditPhoto: React.FC<EditPhotoProps> = ({open, photo, onClose}) => {
                     multiple
                     value={albumNames}
                     onChange={handleAlbumChange}
-                    input={<Input />}
+                    input={<OutlinedInput label="Albums" />}
                     MenuProps={MenuProps}
+                    renderValue={(selected) => selected.join(', ')}
                 >
                     {albums.map((album) => (
                         <MenuItem key={album.name} value={album.name}>
-                            {album.name}
+                            <Checkbox checked={albumNames.indexOf(album.name) > -1} />
+                            <ListItemText primary={album.name} />
+                            {/*{album.name}*/}
                         </MenuItem>
                     ))}
                 </Select>
             </FormControl>
-            <TextField margin="dense" id="description" label="Description" value={description}
-                       onChange={handleDescriptionChange} fullWidth multiline rows={2} />
         </MPDialog>
     )
 }
