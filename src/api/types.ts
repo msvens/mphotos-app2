@@ -139,8 +139,6 @@ export type Photo = {
     id: string;
     md5: string;
     source: string;
-    sourceId: string;
-    sourceOther: string;
     sourceDate: string;
     uploadDate: string;
     originalDate: string;

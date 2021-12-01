@@ -90,12 +90,6 @@ const UpdateCamera: React.FC<UpdateCameraProps> = ({open, onClose, camera}) => {
                                     return editRow(p)
                             })
                     }
-                    {/*{Object.getOwnPropertyNames(c).map((v, i) => {
-                        if (v === "make" || v === "model")
-                            return row(v)
-                        else if (v !== "id" && v !== "image")
-                            return editRow(v)
-                    })}*/}
                 </TableBody>
             </Table>
         </MPDialog>

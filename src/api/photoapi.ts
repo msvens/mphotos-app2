@@ -32,6 +32,12 @@ class PhotoApi {
             .then(res => res.json())
     }
 
+    private static reqMPBody(url: string, data: FormData, method: string = 'PUT'): Promise<any> {
+        return fetch(url,
+            {method: method,body: data})
+            .then(res => res.json())
+    }
+
     private static reqBody(url: string, data: any, method: string = 'PUT'): Promise<any> {
         return fetch(url,
             {method: method, headers: {'Content-Type': 'application/json'},body: JSON.stringify(data)})
@@ -303,14 +309,14 @@ class PhotoApi {
             .then(res => res as MPhotosResponse<mt.PhotoList>).then(res => PhotoApi.convert(res))
     }
 
-    statusJob(id: string): Promise<mt.Job> {
-        return PhotoApi.req(`/api/photos/job/${id}`)
+    statusDriveAddPhotosJob(id: string): Promise<mt.Job> {
+        return PhotoApi.req(`/api/drive/job/${id}`)
             .then(res => res as MPhotosResponse<mt.Job>)
             .then(res => PhotoApi.convert(res))
     };
 
-    scheduleUpdatePhotos(): Promise<mt.Job> {
-        return PhotoApi.req('/api/photo/job/schedule', 'POST')
+    scheduleDriveAddPhotosJob(): Promise<mt.Job> {
+        return PhotoApi.req('/api/drive/job/schedule', 'POST')
             .then(res => res as MPhotosResponse<mt.Job>)
             .then(res => PhotoApi.convert(res));
     }
@@ -354,7 +360,7 @@ class PhotoApi {
     uploadCameraImage(cameraId: string, file: File): Promise <mt.Camera> {
         const formData = new FormData();
         formData.append("image", file, file.name);
-        return PhotoApi.reqBody(`/api/cameras/${cameraId}/image/upoad`, formData)
+        return PhotoApi.reqMPBody(`/api/cameras/${cameraId}/image/upoad`, formData)
             .then(res => res as MPhotosResponse<mt.Camera>)
             .then(res => PhotoApi.convert(res))
     }
@@ -365,11 +371,22 @@ class PhotoApi {
             .then(res => res as MPhotosResponse<mt.Guest>).then(res => PhotoApi.convert(res))
     }
 
-    updatePhotos(): Promise<mt.DriveFiles> {
-        return PhotoApi.req('/api/photo', 'PUT')
+    uploadDrivePhotos(): Promise<mt.DriveFiles> {
+        return PhotoApi.req('/api/drive/upload', 'PUT')
             .then(res => res as MPhotosResponse<mt.DriveFiles>)
             .then(res => PhotoApi.convert(res));
     };
+
+    uploadLocalPhoto(file: File): Promise <mt.Photo> {
+        const formData = new FormData();
+        formData.append("sourceId", file.name)
+        formData.append("sourceDate", new Date(file.lastModified).toISOString())
+        formData.append("image", file, file.name);
+        return PhotoApi.reqMPBody(`/api/local/upload`, formData)
+            .then(res => res as MPhotosResponse<mt.Photo>)
+            .then(res => PhotoApi.convert(res))
+    }
+
 
     updatePhoto(photoId: string, title: string, description: string,
                 keywords: string, albums: string[]): Promise<mt.Photo> {
@@ -387,7 +404,8 @@ class PhotoApi {
     }
 
     updateUserDrive(name: string): Promise <mt.User> {
-        return PhotoApi.reqBody('/api/user/drive', {driveFolderName: name})
+        alert("change folder name to "+name)
+        return PhotoApi.reqBody('/api/user/gdrive', {driveFolderName: name})
             .then(res => res as MPhotosResponse<mt.User>)
             .then(res => PhotoApi.convert(res));
     }

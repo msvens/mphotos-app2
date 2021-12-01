@@ -11,27 +11,14 @@ import {useEffect, useState} from "react";
 import {Job, JobState} from "../api/types";
 import PhotosApi from "../api/photoapi";
 import {useInterval} from "../hooks/useTimers";
+import MPProgress from "../common/MPProgress";
 
 type DownloadDrivePhotosProps = {
     open: boolean,
     onClose: () => void
 }
 
-function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
-    return (
-        <Box display="flex" alignItems="center">
-            <Box width="100%" mr={1}>
-                <LinearProgress variant="determinate" {...props} />
-            </Box>
-            <Box minWidth={35}>
-                <Typography variant="body2" color="textSecondary">{`${Math.round(
-                    props.value,
-                )}%`}
-                </Typography>
-            </Box>
-        </Box>
-    );
-}
+
 
 const DownloadDrivePhotos: React.FC<DownloadDrivePhotosProps> = ({open, onClose}) => {
 
@@ -43,7 +30,7 @@ const DownloadDrivePhotos: React.FC<DownloadDrivePhotosProps> = ({open, onClose}
     const checkJob = () => {
         const check = async () => {
             if (job) {
-                const res = await PhotosApi.statusJob(job.id)
+                const res = await PhotosApi.statusDriveAddPhotosJob(job.id)
                 switch (res.state) {
                     case JobState.FINISHED:
                         setIsRunning(false)
@@ -74,7 +61,7 @@ const DownloadDrivePhotos: React.FC<DownloadDrivePhotosProps> = ({open, onClose}
 
     const handleDownload = () => {
         const scheduleJob = async () => {
-            const res = await PhotosApi.scheduleUpdatePhotos()
+            const res = await PhotosApi.scheduleDriveAddPhotosJob()
             if (res.state === JobState.STARTED || res.state === JobState.SCHEDULED) {
                 setIsRunning(true)
                 setJob(res)
@@ -91,7 +78,7 @@ const DownloadDrivePhotos: React.FC<DownloadDrivePhotosProps> = ({open, onClose}
                 <>
                     <DialogTitle id="dialog-title">Download Progress</DialogTitle>
                     <DialogContent>
-                        <LinearProgressWithLabel value={job.percent}/>
+                        <MPProgress value={job.percent}/>
                     </DialogContent>
                     <DialogActions>
                         <Button disabled={isRunning} onClick={() => {

@@ -8,6 +8,7 @@ import Drive from "./Drive";
 import EditUXConfig from "./EditUXConfig";
 import {Link as RouterLink} from "react-router-dom";
 import Login from "./Login";
+import Local from "./Local";
 
 const PROFILE = 'profile';
 const DRIVE = 'drive';
@@ -60,6 +61,7 @@ const UserPage: React.FC = () => {
                 {context.isUser && setting === undefined && <Profile/>}
                 {context.isUser && setting === PROFILE && <Profile/>}
                 {context.isUser && setting === DRIVE && <Drive/>}
+                {context.isUser && setting === LOCAL && <Local/>}
                 {context.isUser && setting === UXCONFIG && <EditUXConfig/>}
                 {context.isUser && setting === LOGOUT &&
                 <Box>

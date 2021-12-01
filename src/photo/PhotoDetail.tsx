@@ -112,7 +112,7 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
     }
 
     const getTitle = () => {
-        return props.photo.title === "" ? "Unknown" : props.photo.title;
+        return props.photo.title === "" ? "Untitled" : props.photo.title;
     }
 
     const getCamera = () => {
@@ -203,7 +203,7 @@ const PhotoDetail: React.FC<PhotoDetailProps> = (props: PhotoDetailProps) => {
                 <Grid item xs={12} sm={6}>
                     <Typography variant="subtitle1">
                         <Box fontWeight={"fontWeightBold"}>
-                            {getTitle()}.
+                            {getTitle()}
                         </Box>
                     </Typography>
                     <Typography variant="body2">

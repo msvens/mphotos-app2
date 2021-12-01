@@ -5,10 +5,11 @@ import styled from "@emotion/styled";
 
 type MPFileInputProps = {
     multi?: boolean,
-    onChange: (files: FileList) => void,
+    onChange: (files: FileList | null) => void,
     iconButton?: boolean,
     showSelectedFile?: boolean,
-    buttonText?: string
+    buttonText?: string,
+    acceptMimeTypes?: string
 }
 
 const Input = styled('input')({
@@ -21,7 +22,11 @@ const MPFileInput: React.FC<MPFileInputProps> = (props) => {
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const fileList = event.target.files;
-        if (!fileList) return;
+        if (!fileList || fileList.length == 0) {
+            setFnames("selected files")
+            props.onChange(fileList)
+            return
+        }
         if(fileList.length > 1) {
             let fn = ""
             for(let i = 0; i < fileList.length && i < 5; i++) {
@@ -44,7 +49,7 @@ const MPFileInput: React.FC<MPFileInputProps> = (props) => {
                     id="btn-upload"
                     name="btn-upload"
                     type="file"
-                    accept={"image/png, image/jpeg"}
+                    accept={props.acceptMimeTypes}
                     onChange={handleFileChange}
                     multiple={props.multi}
                 />
@@ -87,9 +92,10 @@ const MPFileInput: React.FC<MPFileInputProps> = (props) => {
 }
 
 MPFileInput.defaultProps = {
-    iconButton: true,
+    iconButton: false,
     multi: false,
     showSelectedFile: true,
+    acceptMimeTypes: "image/png, image/jpeg"
 } as Partial<MPFileInputProps>
 
 export default MPFileInput

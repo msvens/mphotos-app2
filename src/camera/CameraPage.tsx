@@ -61,8 +61,9 @@ const CameraPage: React.FC = () => {
         setUrl(event.target.value);
     }
 
-    const handleFileChange = (event: FileList) => {
-        setFile(event[0])
+    const handleFileChange = (event: FileList|null) => {
+        if (event)
+            setFile(event[0])
     }
 
     const onUpdateCamera = (u?: Camera) => {
