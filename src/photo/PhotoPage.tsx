@@ -207,7 +207,7 @@ const PhotoPage: React.FC = () => {
         const n = photos.previous()
         history.push('/photo/' + n.id())
         setPhotos(n)
-        history.push('/photo/' + photos.id())
+        //history.push('/photo/' + photos.id())
         //window.history.pushState({}, '', '/photo/' + photos.id())
     }
 
