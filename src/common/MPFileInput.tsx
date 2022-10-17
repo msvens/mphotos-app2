@@ -22,7 +22,7 @@ const MPFileInput: React.FC<MPFileInputProps> = (props) => {
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const fileList = event.target.files;
-        if (!fileList || fileList.length == 0) {
+        if (!fileList || fileList.length === 0) {
             setFnames("selected files")
             props.onChange(fileList)
             return

@@ -22,7 +22,9 @@ export const useGuest: () => [boolean, Guest, () => void] = () => {
                 }
                 setIsGuest(res)
             } catch(error) {
-                alert("error fetching guest: "+error.toString())
+                if(error instanceof Error) {
+                    alert("rror fetching user: "+error.toString())
+                }
             }
         }
         fetchData()

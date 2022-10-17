@@ -16,7 +16,10 @@ export const useUXConfig: () => [UXConfig, () => void] = () => {
                 const res = await PhotosApi.getUXConfig()
                 setUXConfig(res)
             } catch (error) {
-                alert("error fetching uxConfig: "+error.toString())
+                if (error instanceof Error) {
+                    alert("error fetching uxConfig: "+error.toString())
+                }
+
             }
         }
         fetchData()

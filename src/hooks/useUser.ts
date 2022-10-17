@@ -20,7 +20,10 @@ export const useUser: () => [boolean, User, () => void] = () => {
                 setUser(res1)
                 setIsUser(res)
             }  catch(error) {
-                alert("rror fetching user: "+error.toString())
+                if(error instanceof Error) {
+                    alert("rror fetching user: "+error.toString())
+                }
+
             }
         }
         fetchData()
