@@ -11,13 +11,13 @@ photo blog.
 
 ## Development
 
-yarn
-yarn dev
+- yarn
+- yarn dev
 
 ## Building
 
-yarn
-yarn build
+- yarn
+- yarn build
 
 ## Key Features
 
