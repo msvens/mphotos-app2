@@ -7,6 +7,18 @@ a simplified workflow from lightroom to photo blog such that once you export
 your edited images to Google Drive they will be automatically picked up by the
 photo blog.
 
+# Installation/Running
+
+## Development
+
+yarn
+yarn dev
+
+## Building
+
+yarn
+yarn build
+
 ## Key Features
 
 - Connect to google drive
