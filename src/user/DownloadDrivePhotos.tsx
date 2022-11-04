@@ -54,7 +54,7 @@ const DownloadDrivePhotos: React.FC<DownloadDrivePhotosProps> = ({open, onClose}
 
     useEffect(() => {
         if (job === undefined) {
-            PhotosApi.checkDrive().then(res => setNumPhotos(res.length)).catch(err => alert(err))
+            PhotosApi.checkDrive().then(res => setNumPhotos(res.length)).catch(err => console.log(err))
         }
     }, [job])
 

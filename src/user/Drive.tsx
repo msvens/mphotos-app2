@@ -5,6 +5,7 @@ import DownloadDrivePhotos from "./DownloadDrivePhotos";
 import PhotosApi from "../api/photoapi";
 
 const Drive: React.FC = () => {
+    const authURL = "/api/drive/auth?redir="+encodeURIComponent('/user/drive')
     const [folder, setFolder] = useState('')
     const [id, setId] = useState('')
     const [openDelete, setOpenDelete] = useState(false)
@@ -15,7 +16,7 @@ const Drive: React.FC = () => {
     useEffect(() => {
         PhotosApi.isGoogleAuth()
             .then(a => setAuthenticated(a))
-            .catch(e => alert("error in auth: "+e.toString()))
+        .catch(e => console.log("error in auth: "+e.toString()))
     }, [])
 
     useEffect(() => {
@@ -26,7 +27,7 @@ const Drive: React.FC = () => {
                 if (u.driveFolderName)
                     setFolder(u.driveFolderName);
             })
-            .catch(e => alert("error in user: "+e.toString()));
+            .catch(e => console.log("error in user: "+e.toString()));
     }, [])
 
 
@@ -63,7 +64,7 @@ const Drive: React.FC = () => {
             <Typography variant="body1" paragraph={true}>
                 Connected to Google: <strong>{String(authenticated)}</strong>
             </Typography>
-            <Button variant="outlined" disabled={authenticated} href="/api/drive/auth">Connect to Google</Button>
+            <Button variant="outlined" disabled={authenticated} href={authURL}>Connect to Google</Button>
 
             <Divider sx={{marginBottom: 6, marginTop: 2}}/>
             <Typography variant="body1" paragraph={true}>
