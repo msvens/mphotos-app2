@@ -13,6 +13,7 @@ import EditPhoto from "./EditPhoto";
 import MPDialog from "../common/MpDialog";
 import PhotoFilter from "./PhotoFilter";
 import {styled} from "@mui/system";
+import CropPhoto from "./CropPhoto";
 
 type TouchState = {
     xStart: number,
@@ -113,6 +114,7 @@ const PhotoPage: React.FC = () => {
     const [album, setAlbum] = useState<Album>()
     const [showDelete, setShowDelete] = useState(false)
     const [showUpdate, setShowUpdate] = useState(false)
+    const [showCrop, setShowCrop] = useState(false)
     const [showFullscreen, setShowFullscreen] = useState(false)
     const touch: TouchState = {xStart: -1, xPos: -1, yStart: -1, yPos: -1}
 
@@ -218,6 +220,13 @@ const PhotoPage: React.FC = () => {
         setShowUpdate(false)
     }
 
+    const handleCropUpdate = (p?: Photo) => {
+        /*if (p) {
+            setPhotos(photos.update(p))
+        }*/
+        setShowCrop(false)
+    }
+
     const handleForward = () => {
         const n = photos.next()
         history.push('/photo/' + n.id())
@@ -265,56 +274,58 @@ const PhotoPage: React.FC = () => {
     return (
         <RootDiv>
             {photos.hasPhotos() &&
-            <>
-                <Grid container sx={{alignItems: "center", justifyContent: "space-around"}}>
-                    {location.search &&
-                    <Grid item xs={12}>
-                        <PhotoFilter cs={cs} filter={location.search}
-                                     onClear={() => history.push('/photo/' + photos.id())}/>
-                    </Grid>
-                    }
-                    <Grid item xs={12} style={{backgroundColor: context.uxConfig.photoBackgroundColor}}
-                          sx={isLargeDisplay ? ImgGridStyle : SmallImgGridStyle}
-                          onTouchEnd={onEndTouch}
-                          onTouchStart={onStartTouch}
-                          onTouchMove={onMoveTouch}>
-                        <PhotoControls photoBackground={context.uxConfig.photoBackgroundColor}
-                                       onBackward={handleBackward}
-                                       onForward={handleForward}
-                                       onFullScreen={() => setShowFullscreen(true)}
-                                       onPrivate={handlePrivate}
-                                       onDelete={() => setShowDelete(true)}
-                                       onEdit={() => setShowUpdate(true)}
-                                       onProfilePic={() => alert("edit")}
-                                       showEditControls={context.isUser}
-                                       isAlbum={!!album}
-                                       isPrivate={photos.get().private}
-                                       isLargeDisplay={isLargeDisplay}
-                                       inFullscreen={false}
-                                       hasBorders={hasBorders()}
-                                       verticalEditButtons={hasBorders()}
+                <>
+                    <Grid container sx={{alignItems: "center", justifyContent: "space-around"}}>
+                        {location.search &&
+                            <Grid item xs={12}>
+                                <PhotoFilter cs={cs} filter={location.search}
+                                             onClear={() => history.push('/photo/' + photos.id())}/>
+                            </Grid>
+                        }
+                        <Grid item xs={12} style={{backgroundColor: context.uxConfig.photoBackgroundColor}}
+                              sx={isLargeDisplay ? ImgGridStyle : SmallImgGridStyle}
+                              onTouchEnd={onEndTouch}
+                              onTouchStart={onStartTouch}
+                              onTouchMove={onMoveTouch}>
+                            <PhotoControls photoBackground={context.uxConfig.photoBackgroundColor}
+                                           onBackward={handleBackward}
+                                           onForward={handleForward}
+                                           onFullScreen={() => setShowFullscreen(true)}
+                                           onPrivate={handlePrivate}
+                                           onDelete={() => setShowDelete(true)}
+                                           onEdit={() => setShowUpdate(true)}
+                                           onCrop={() => setShowCrop(true)}
+                                           onProfilePic={() => alert("edit")}
+                                           showEditControls={context.isUser}
+                                           isAlbum={!!album}
+                                           isPrivate={photos.get().private}
+                                           isLargeDisplay={isLargeDisplay}
+                                           inFullscreen={false}
+                                           hasBorders={hasBorders()}
+                                           verticalEditButtons={hasBorders()}
 
-                        />
-                        {getImageComponent()}
-                        {/* <img className={getImageClass()} alt={photo.get().title}
+                            />
+                            {getImageComponent()}
+                            {/* <img className={getImageClass()} alt={photo.get().title}
                              src={PhotosApi.getImageUrl(photo.get(), PhotoType.Dynamic, isPortrait, isLargeDisplay)}/>*/}
 
+                        </Grid>
+                        <Grid item xs={12} sx={hasBorders() ? detailGridBorders : detailGrid}>
+                            <PhotoDetail photo={photos.get()}/>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sx={hasBorders() ? detailGridBorders : detailGrid}>
-                        <PhotoDetail photo={photos.get()}/>
-                    </Grid>
-                </Grid>
-                <FullscreenPhoto photo={photos.get()} openDialog={showFullscreen}
-                                 onClose={() => setShowFullscreen(false)} onNext={handleForward}
-                                 onPrev={handleBackward} photoBackground={context.uxConfig.photoBackgroundColor}
-                                 largeDisplay={isLargeDisplay}/>
-                <EditPhoto open={showUpdate} photo={photos.get()} onClose={handleCloseUpdate}/>
-                <MPDialog open={showDelete}
-                          onClose={() => setShowDelete(false)}
-                          onOk={deletePhoto}
-                          title={"Delete Photo?"}
-                          text="By removing the photo all associated image data will be deleted"/>
-            </>
+                    <FullscreenPhoto photo={photos.get()} openDialog={showFullscreen}
+                                     onClose={() => setShowFullscreen(false)} onNext={handleForward}
+                                     onPrev={handleBackward} photoBackground={context.uxConfig.photoBackgroundColor}
+                                     largeDisplay={isLargeDisplay}/>
+                    <EditPhoto open={showUpdate} photo={photos.get()} onClose={handleCloseUpdate}/>
+                    <CropPhoto open={showCrop} photo={photos.get()} onUpdate={handleCropUpdate}/>
+                    <MPDialog open={showDelete}
+                              onClose={() => setShowDelete(false)}
+                              onOk={deletePhoto}
+                              title={"Delete Photo?"}
+                              text="By removing the photo all associated image data will be deleted"/>
+                </>
             }
         </RootDiv>
     )

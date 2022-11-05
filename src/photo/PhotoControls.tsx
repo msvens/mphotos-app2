@@ -7,6 +7,7 @@ import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import EditIcon from "@mui/icons-material/Edit";
+import CropRotateIcon from '@mui/icons-material/CropRotate';
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
 import FaceIcon from "@mui/icons-material/Face";
@@ -26,6 +27,8 @@ type PhotoControlsProps = {
     onPrivate?: () => void
     onDelete?: () => void
     onEdit?: () => void
+
+    onCrop?: () => void
     onProfilePic?: () => void
     isAlbum?: boolean
 }
@@ -99,11 +102,13 @@ const PhotoControls: React.FC<PhotoControlsProps> = (props) => {
         )
     }
 
-    const wrap = (f?: () => void):()=>void => {
-        if(f)
+    const wrap = (f?: () => void): () => void => {
+        if (f)
             return f
         else
-            return () => {alert("undefiend action")}
+            return () => {
+                alert("undefiend action")
+            }
     }
 
     return (
@@ -127,30 +132,33 @@ const PhotoControls: React.FC<PhotoControlsProps> = (props) => {
                 </IconButton>
             }
             {props.showEditControls &&
-            <Box sx={editButtonsStyle}>
-                {props.isAlbum
-                    ? <EditButton tooltip="Set Album Cover" onClick={wrap(props.onProfilePic)}>
-                        <PhotoAlbumIcon fontSize={iconS()}/>
+                <Box sx={editButtonsStyle}>
+                    {props.isAlbum
+                        ? <EditButton tooltip="Set Album Cover" onClick={wrap(props.onProfilePic)}>
+                            <PhotoAlbumIcon fontSize={iconS()}/>
+                        </EditButton>
+                        : <EditButton tooltip="Set Profile Picture" onClick={wrap(props.onProfilePic)}>
+                            <FaceIcon fontSize={iconS()}/>
+                        </EditButton>
+                    }
+                    {props.isPrivate
+                        ? <EditButton tooltip="Set Public Photo" onClick={wrap(props.onPrivate)}>
+                            <LockIcon fontSize={iconS()}/>
+                        </EditButton>
+                        : <EditButton tooltip="Set Private Photo" onClick={wrap(props.onPrivate)}>
+                            <LockOpenIcon fontSize={iconS()}/>
+                        </EditButton>
+                    }
+                    <EditButton tooltip="Edit Photo Description" onClick={wrap(props.onEdit)}>
+                        <EditIcon fontSize={iconS()}/>
                     </EditButton>
-                    : <EditButton tooltip="Set Profile Picture" onClick={wrap(props.onProfilePic)}>
-                        <FaceIcon fontSize={iconS()}/>
+                    <EditButton tooltip="Crop & Rotate Photo" onClick={wrap(props.onCrop)}>
+                        <CropRotateIcon fontSize={iconS()}/>
                     </EditButton>
-                }
-                {props.isPrivate
-                    ? <EditButton tooltip="Set Public Photo" onClick={wrap(props.onPrivate)}>
-                        <LockIcon fontSize={iconS()}/>
+                    <EditButton tooltip="Delete Photo" onClick={wrap(props.onDelete)}>
+                        <DeleteForeverIcon fontSize={iconS()}/>
                     </EditButton>
-                    : <EditButton tooltip="Set Private Photo" onClick={wrap(props.onPrivate)}>
-                        <LockOpenIcon fontSize={iconS()}/>
-                    </EditButton>
-                }
-                <EditButton tooltip="Edit Photo Description" onClick={wrap(props.onEdit)}>
-                    <EditIcon fontSize={iconS()}/>
-                </EditButton>
-                <EditButton tooltip="Delete Photo" onClick={wrap(props.onDelete)}>
-                    <DeleteForeverIcon fontSize={iconS()}/>
-                </EditButton>
-            </Box>
+                </Box>
             }
         </>
     )
