@@ -319,7 +319,8 @@ const PhotoPage: React.FC = () => {
                                      onPrev={handleBackward} photoBackground={context.uxConfig.photoBackgroundColor}
                                      largeDisplay={isLargeDisplay}/>
                     <EditPhoto open={showUpdate} photo={photos.get()} onClose={handleCloseUpdate}/>
-                    <CropPhoto open={showCrop} photo={photos.get()} onUpdate={handleCropUpdate}/>
+                <CropPhoto open={showCrop} photo={photos.get()} onUpdate={handleCropUpdate} photoBackground={context.uxConfig.photoBackgroundColor}
+                  hasBorders={hasBorders()}/>
                     <MPDialog open={showDelete}
                               onClose={() => setShowDelete(false)}
                               onOk={deletePhoto}
