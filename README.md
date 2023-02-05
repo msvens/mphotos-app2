@@ -23,7 +23,7 @@ photo blog.
 
 ### Mobile First
 This photo blog is designed to work well on both mobile and desktop.
-| col1 | col2 |
+
 | --- | --- |
 | <img src="docs/images/browse-android.jpg" height="450" alt="Browse On Android"/> | <img src="docs/images/portrait-view-android.jpg" height="450" alt="Portrait view Android"/> |
 
