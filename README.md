@@ -21,6 +21,13 @@ photo blog.
 
 ## Key Features
 
+### Mobile First
+This photo blog is designed to work well on both mobile and desktop.
+
+![Browse on Android](docs/images/browse-android.jpg)
+
+
+
 - Connect to google drive
 - Automatic exif parsing and thumbnail creation
 - Setting basic user profile information
@@ -34,10 +41,6 @@ photo blog.
 - Comments, Likes
 - Configurable UI (color theme, image grid settings, etc)
 
-# New in Version 2
-
-- react 17
-- material ui v5
 
 # Thanks
 

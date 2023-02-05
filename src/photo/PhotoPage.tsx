@@ -13,7 +13,7 @@ import EditPhoto from "./EditPhoto";
 import MPDialog from "../common/MpDialog";
 import PhotoFilter from "./PhotoFilter";
 import {styled} from "@mui/system";
-import CropPhoto from "./CropPhoto";
+import EditImage from "./EditImage";
 
 type TouchState = {
     xStart: number,
@@ -60,6 +60,18 @@ const LeftRightImg = styled('img')(({theme}) => ({
     width: 'auto',
     height: 'auto',
 }))
+
+/*
+const LeftRightCropImg = styled('div')(({theme}) => ({
+    paddingLeft: theme.spacing(7),
+    paddingRight: theme.spacing(7),
+    objectFit: 'contain',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 'auto',
+    height: 'auto',
+}))
+ */
 
 const FullImg = styled('img')(({theme}) => ({
     paddingLeft: theme.spacing(7),
@@ -173,14 +185,14 @@ const PhotoPage: React.FC = () => {
                                    src={PhotosApi.getImageUrl(photos.get(), PhotoType.Dynamic, isPortrait, isLargeDisplay)}/>
                     </>
                 )
-            } else if (context.uxConfig.photoBorders === "left-right")
+            } else if (context.uxConfig.photoBorders === "left-right") {
                 return (
                     <>
                         <LeftRightImg alt={photos.get().title}
                                       src={PhotosApi.getImageUrl(photos.get(), PhotoType.Dynamic, isPortrait, isLargeDisplay)}/>
                     </>
                 )
-            else
+            } else
                 return (
                     <>
                         <FullImg alt={photos.get().title}
@@ -218,13 +230,6 @@ const PhotoPage: React.FC = () => {
             setPhotos(photos.update(p))
         }
         setShowUpdate(false)
-    }
-
-    const handleCropUpdate = (p?: Photo) => {
-        /*if (p) {
-            setPhotos(photos.update(p))
-        }*/
-        setShowCrop(false)
     }
 
     const handleForward = () => {
@@ -318,9 +323,14 @@ const PhotoPage: React.FC = () => {
                                      onClose={() => setShowFullscreen(false)} onNext={handleForward}
                                      onPrev={handleBackward} photoBackground={context.uxConfig.photoBackgroundColor}
                                      largeDisplay={isLargeDisplay}/>
+                   {/* <CropPhoto open={showCrop} photo={photos.get()} onUpdate={handleCropUpdate}
+                               photoBackground={context.uxConfig.photoBackgroundColor}
+                               hasBorders={hasBorders()}/>*/}
+                    <EditImage photo={photos.get()} openDialog={showCrop}
+                                     onClose={() => setShowCrop(false)} onNext={handleForward}
+                                     onPrev={handleBackward} photoBackground={context.uxConfig.photoBackgroundColor}
+                                     largeDisplay={isLargeDisplay}/>
                     <EditPhoto open={showUpdate} photo={photos.get()} onClose={handleCloseUpdate}/>
-                <CropPhoto open={showCrop} photo={photos.get()} onUpdate={handleCropUpdate} photoBackground={context.uxConfig.photoBackgroundColor}
-                  hasBorders={hasBorders()}/>
                     <MPDialog open={showDelete}
                               onClose={() => setShowDelete(false)}
                               onOk={deletePhoto}

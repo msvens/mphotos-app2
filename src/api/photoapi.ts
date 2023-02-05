@@ -1,4 +1,5 @@
 import * as mt from "./types";
+import {EditPhotoParams} from "./types";
 
 type MPhotosResponse<T> = {
     error?: mt.ApiError
@@ -124,6 +125,22 @@ class PhotoApi {
     deletePhotos(removeFiles: boolean): Promise<mt.PhotoList> {
         return PhotoApi.reqBody('/api/photo', {removeFiles: removeFiles}, 'DELETE')
             .then(res => res as MPhotosResponse<mt.PhotoList>).then(res => PhotoApi.convert(res));
+    }
+
+    getEditPreviewURL(p: mt.Photo, params: EditPhotoParams): string {
+        const urlParams = new URLSearchParams()
+        if (params.rotation)
+            urlParams.append("rotation", params.rotation.toString())
+        if (params.x)
+            urlParams.append("x", params.x.toString())
+        if (params.y)
+            urlParams.append("y", params.y.toString())
+        if (params.width)
+            urlParams.append("width", params.width.toString())
+        if (params.height)
+            urlParams.append("height", params.height.toString())
+        const queryStr = urlParams.toString()
+        return `/api/photos/${p.id}/edit/preview?${queryStr}`
     }
 
     getImageUrl(p: mt.Photo, type: mt.PhotoType, portraitView: boolean, largeDisplay: boolean):string {

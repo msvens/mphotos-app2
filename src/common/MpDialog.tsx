@@ -48,7 +48,6 @@ const MPDialog: React.FC<MPDialogProps> = ({
             onClose={onClose}
             aria-labelledby={title ? dialogTitle : undefined}
             aria-describedby={text ? dialogText : describedBy}
-
             fullWidth maxWidth='md'>
 
             {title &&

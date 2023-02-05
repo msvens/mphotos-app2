@@ -1,16 +1,19 @@
 import {useState} from "react"
-import ReactCrop, {centerCrop, Crop, makeAspectCrop, PercentCrop, PixelCrop} from "react-image-crop"
+import ReactCrop, {centerCrop, Crop, makeAspectCrop} from "react-image-crop"
 
 import 'react-image-crop/dist/ReactCrop.css'
 import PhotosApi from "../api/photoapi"
 import {Photo, PhotoType} from "../api/types"
 import MPDialog from "../common/MpDialog"
-import CropPortraitIcon from '@mui/icons-material/CropPortrait';
-import CropSquareIcon from '@mui/icons-material/CropSquare';
-import CropLandscapeIcon from '@mui/icons-material/CropLandscape';
-import {alpha, useTheme} from "@mui/material"
-import {colorScheme} from "../api/apiutil"
+import {styled} from "@mui/system";
 
+const NormalImg = styled('img')({
+  objectFit: 'contain',
+  maxWidth: '100%',
+  maxHeight: '100vh',
+  width: 'auto',
+  height: '100vh',
+})
 
 type CropPhotoProps = {
     onUpdate: (p?: Photo) => void
@@ -20,11 +23,9 @@ type CropPhotoProps = {
     hasBorders: boolean
 }
 
-const landscape = 1200 / 628
-const square = 1
 const portrait = 1080 / 1350
 
-const CropPhoto: React.VFC<CropPhotoProps> = ({open, photo, onUpdate, photoBackground, hasBorders}) => {
+const CropPhoto: React.VFC<CropPhotoProps> = ({open, photo, onUpdate}) => {
 
     const [crop, setCrop] = useState<Crop>({
         unit: '%', // Can be 'px' or '%'
@@ -33,7 +34,7 @@ const CropPhoto: React.VFC<CropPhotoProps> = ({open, photo, onUpdate, photoBackg
         width: 50,
         height: 50
     })
-    const theme = useTheme()
+    //const theme = useTheme()
 
     const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
         const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
@@ -46,20 +47,21 @@ const CropPhoto: React.VFC<CropPhotoProps> = ({open, photo, onUpdate, photoBackg
                             unit: '%',
                             width: 90,
                         },
-                        landscape,
+                        portrait,
                         width,
                         height
                         ),
                 width,
                 height
                 )
-
+        //alert("setting crop")
         setCrop(crop)
     }
 
 
-    const cs = colorScheme(photoBackground)
+    //const cs = colorScheme(photoBackground)
 
+    /*
     const editButtonStyle = {
         color: cs.color,
         backgroundColor: alpha(cs.backgroundColor, hasBorders ? 0.0 : 0.5).toString(),
@@ -68,8 +70,9 @@ const CropPhoto: React.VFC<CropPhotoProps> = ({open, photo, onUpdate, photoBackg
             {
                 backgroundColor: alpha(cs.backgroundColor, 0.9).toString(),
             }
-    } as const
+    } as const*/
 
+    /*
     const editButtonsStyle = {
         ...editButtonStyle,
         display: 'flex',
@@ -78,6 +81,7 @@ const CropPhoto: React.VFC<CropPhotoProps> = ({open, photo, onUpdate, photoBackg
         top: theme.spacing(0),
         left: theme.spacing(0),
     } as const
+    */
 
     const handleUpdatePhotoCrop = () => {
         alert("clicked ok")
@@ -94,10 +98,18 @@ const CropPhoto: React.VFC<CropPhotoProps> = ({open, photo, onUpdate, photoBackg
         <MPDialog open={open} onClose={handleOnClose} onOk={handleUpdatePhotoCrop} title={"Crop and Rotate Photo"}
                   closeOnOk={false}>
 
-            <ReactCrop crop={crop} onChange={c => setCrop(c)} aspect={portrait}>
-                <img src={PhotosApi.getImageUrl(photo, PhotoType.Original, false, true)}
-                onLoad={onImageLoad}/>
-            </ReactCrop>
+            {/*<RootDiv>
+                <Box sx={{display: "flex", flexGrow: 1, flexDirection: "column"}}>
+                    <NormalImg src={PhotosApi.getImageUrl(photo, PhotoType.Resize, false, true)}
+                               onLoad={onImageLoad}/>
+                </Box>
+            </RootDiv>*/}
+
+          <ReactCrop crop={crop} onChange={c => setCrop(c)} aspect={portrait}>
+            <NormalImg src={PhotosApi.getImageUrl(photo, PhotoType.Resize, false, true)}
+              onLoad={onImageLoad}/>
+          </ReactCrop>
+
         </MPDialog>
     )
 }

@@ -134,6 +134,13 @@ export enum JobState {
     ABORTED = "ABORTED"
 }
 
+export type EditPhotoParams = {
+    rotation?: number,
+    x?: number,
+    y?: number,
+    width?: number,
+    height?: number
+}
 
 export type Photo = {
     id: string;
